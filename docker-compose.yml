@@ -32,6 +32,12 @@ services:
       MYSQL_PASSWORD: klotorol159.M
     ports: 
       - 3307:3306
+  bot:
+       build:
+         context: ./telegram-bot  # Укажите путь к папке с ботом
+         dockerfile: Dockerfile
+       container_name: telegram-bot-container
+       restart: always  # Опционально, чтобы контейнер перезапускался в случае сбоя
 volumes:
   SPAMSDB:    
     external: true
