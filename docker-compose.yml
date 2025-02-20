@@ -10,7 +10,8 @@ services:
     ports:
       - "8080:8080" # Измените на нужный порт вашего приложения
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
   frontend:
     build:
       context: ./MVP-2-SPMS-front-side  # Укажите путь к папке с фронтендом
@@ -32,6 +33,11 @@ services:
       MYSQL_PASSWORD: klotorol159.M
     ports: 
       - 3307:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   bot:
        build:
          context: ./telegram-bot  # Укажите путь к папке с ботом
