@@ -1,0 +1,5 @@
+{
+    "addr": "http://localhost",
+    "port": ":8080",
+    "return_url": "http://localhost:8080"
+}

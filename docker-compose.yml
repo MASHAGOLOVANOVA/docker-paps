@@ -1,0 +1,37 @@
+version: '2.1'
+
+name: spams-container
+services:
+  web:
+    build:
+        context: ./mvp-2-spms
+        dockerfile: build.Dockerfile
+    container_name: web-spams-container
+    ports:
+      - "8080:8080" # Измените на нужный порт вашего приложения
+    depends_on:
+      - mysql
+  frontend:
+    build:
+      context: ./MVP-2-SPMS-front-side  # Укажите путь к папке с фронтендом
+      dockerfile: Dockerfile
+    container_name: front-spams-container
+    ports:
+      - "3000:3000"  # Проброс порта для фронтенда
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Для корректной работы hot-reloading
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    volumes:
+      - SPAMSDB:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: student_project_management
+      MYSQL_USER: owner
+      MYSQL_PASSWORD: klotorol159.M
+    ports: 
+      - 3307:3306
+volumes:
+  SPAMSDB:    
+    external: true
