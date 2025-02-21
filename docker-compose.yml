@@ -8,19 +8,19 @@ services:
         dockerfile: build.Dockerfile
     container_name: web-spams-container
     ports:
-      - "8080:8080" # Измените на нужный порт вашего приложения
+      - "8080:8080" 
     depends_on:
       mysql:
         condition: service_healthy
   frontend:
     build:
-      context: ./MVP-2-SPMS-front-side  # Укажите путь к папке с фронтендом
+      context: ./MVP-2-SPMS-front-side 
       dockerfile: Dockerfile
     container_name: front-spams-container
     ports:
-      - "3000:3000"  # Проброс порта для фронтенда
+      - "3000:3000"  
     environment:
-      - CHOKIDAR_USEPOLLING=true  # Для корректной работы hot-reloading
+      - CHOKIDAR_USEPOLLING=true 
   mysql:
     image: mysql:latest
     container_name: mysql-container
@@ -40,10 +40,10 @@ services:
       retries: 5
   bot:
        build:
-         context: ./telegram-bot  # Укажите путь к папке с ботом
+         context: ./telegram-bot  
          dockerfile: Dockerfile
        container_name: telegram-bot-container
-       restart: always  # Опционально, чтобы контейнер перезапускался в случае сбоя
+       restart: always  
 volumes:
   SPAMSDB:    
     external: true
