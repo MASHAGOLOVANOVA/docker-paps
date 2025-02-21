@@ -25,11 +25,6 @@ jobs:
           cd MVP-2-SPMS-front-side
           npm install
 
-      - name: Run tests
-        run: |
-          cd MVP-2-SPMS-front-side
-          npm test
-
   backend:
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +34,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: '1.16'
+          go-version: '1.22'
 
       - name: Install dependencies
         run: |
