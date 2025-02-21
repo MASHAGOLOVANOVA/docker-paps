@@ -7,10 +7,13 @@ import telebot
 import requests
 from requests.exceptions import RequestException
 from telegram.constants import ParseMode
+from dotenv import load_dotenv
+import os
 
-HOST_URL = "http://localhost:8080"
-
-CLIENT_URL = "http://localhost:3000"
+load_dotenv()
+# Получаем значения переменных окружения
+HOST_URL = os.getenv("HOST_URL", "http://localhost:8080")  # Значение по умолчанию
+CLIENT_URL = os.getenv("CLIENT_URL", "http://localhost:3000") 
 
 class SessionManager:
     """Класс для получении инфы о сессии"""
