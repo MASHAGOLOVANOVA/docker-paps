@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          path: frontend
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -37,8 +35,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          path: backend
 
       - name: Set up Go
         uses: actions/setup-go@v2
@@ -60,8 +56,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          path: bot
 
       - name: Set up Python
         uses: actions/setup-python@v2
