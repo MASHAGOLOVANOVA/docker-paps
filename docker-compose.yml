@@ -46,6 +46,18 @@ services:
          dockerfile: Dockerfile
        container_name: telegram-bot-container
        restart: always  
+  migrate:
+    image: mysql:latest
+    container_name: migrate-container
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./mvp-2-spms/database/migrations:/migrations
+    command: >
+      sh -c "for file in /migrations/*.sql; do
+        mysql -h mysql-container -u root -proot student_project_management < \$file;
+      done"
 volumes:
   SPAMSDB:    
     external: true
