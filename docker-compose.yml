@@ -12,9 +12,9 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    environment:
-      - DB_CONNECTION_STRING=root:root@tcp(mysql-container:3306)/student_project_management?parseTime=true
   frontend:
+    env_file:
+      - ./MVP-2-SPMS-front-side/telegram-bot/.env
     build:
       context: ./MVP-2-SPMS-front-side 
       dockerfile: Dockerfile
@@ -42,13 +42,15 @@ services:
       timeout: 10s
       retries: 5
   bot:
-       build:
-         context: ./telegram-bot  
-         dockerfile: Dockerfile
-       container_name: telegram-bot-container
-       restart: always  
-       environment:
-         HOST_URL=http://web:8080
+     env_file:
+       - ./telegram-bot/.env
+     build:
+       context: ./telegram-bot  
+       dockerfile: Dockerfile
+     container_name: telegram-bot-container
+     restart: always  
+     environment:
+       HOST_URL=http://web:8080
   migrate:
     image: mysql:latest
     container_name: migrate-container
